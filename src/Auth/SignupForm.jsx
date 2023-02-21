@@ -1,20 +1,31 @@
 import { useState } from "react";
-
-export default function SignupForm({onSubmit}) {
+import * as cognito from "../cognito";
+export default function SignupForm() {
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[email, setEmail] = useState("");
     const[confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({username, password, email, confirmPassword})
-    }
+    const handleSignUp = async (username, email, password, confirmPassword) => {
+    
+        if(password !== confirmPassword) {
+            setErrorMessage("Passwords do not match")
+            return
+        }
+        try{
+          await cognito.signUp(username, email, password, confirmPassword)
+          
+        }catch(error){
+            console.log("Error signing up", error)
+            setErrorMessage("Error signing up")
+    
+        }}
 
 
 
     return(
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded w-2/6">
+        <form onSubmit={handleSignUp} className="bg-white shadow-md rounded w-2/6">
             <div clasName="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                     Username

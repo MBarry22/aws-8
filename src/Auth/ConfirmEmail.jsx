@@ -1,18 +1,23 @@
 import { useState } from "react";
-
-export default function ConfirmEmail({onSubmit}) {
+import * as cognito from "../cognito";
+export default function ConfirmEmail() {
     const[username, setUsername] = useState("");
     const[code, setCode] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({username, code})
+    const handleConfirmEmail = async (username, code) => {
+        try{
+            await cognito.confirmUser(username, code)
+        }catch(error){
+            console.log("Error confirming sign up", error)
+            setErrorMessage("Error confirming sign up")
+        }
     }
 
 
 
     return(
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded w-2/6">
+        <form onSubmit={handleConfirmEmail} className="bg-white shadow-md rounded w-2/6">
             <div clasName="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                     Username

@@ -1,22 +1,27 @@
 import { useState } from "react";
-
+import * as cognito from "../cognito";
 export default function SignupForm({onSubmit}) {
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
 
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted", {username, password});
-    onSubmit({username, password});
-
+    const handleLogin = async (username, password) => {
+        try{
+            await cognito.signIn(username, password)
+            
+            
+        }catch(error){
+            console.log("Error logging in", error)
+            setErrorMessage("Error logging in")
+        }
     }
 
 
 
     return(
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded">
-            <div clasName="mb-4">
+        <form onSubmit={handleLogin} className="bg-white shadow-md rounded">
+            <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                     Username
                 </label>
