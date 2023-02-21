@@ -8,15 +8,15 @@ import HomePage from '../HomePage'
 import Routers from '../routers/Router'
 
 export default function Page() {
-    const [errorMessage, setErrorMessage] = useState(null)
+    //const [errorMessage, setErrorMessage] = useState(null)
 
     //routing logic
-    const[page, setPage] = useState("login")
+    //const[page, setPage] = useState("login")
 
     
 
 
-    let currentForm = null
+   // let currentForm = null
 
     // routing logic change to react router later
        /*switch(page){

@@ -9,26 +9,21 @@ useEffect(() => {
   setUser(user)
   }, [])
 
+  async function SignOut() {
+    const token = await cognito.signOut()
+    console.log(token)
+  }
 
-  const handleSignOut = async (username) => {
-    try{
-         cognito.signOut(username)
-        
-    }catch(error){
-        console.log("Error confirming sign up", error)
-        setErrorMessage("Error confirming sign up")
-    }
-}
- 
-
-  console.log(user)
+  
 
   return (
-    <div className="justify-center text-center">
+    <div className="App">
       
-      <h1>Profile:</h1>
+      <h1>Aligator App</h1>
       <h2>{user && <p>Hello There{user.username}</p>}</h2>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={SignOut}>Sign Out</button>
+      
+      
       
     </div>
   )
