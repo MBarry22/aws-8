@@ -1,10 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import SignupForm from './SignupForm'
-import * as coginto from '../cognito'
-import ConfirmEmail from './ConfirmEmail'
-import LoginForm from './LoginForm'
-import HomePage from '../HomePage'
+
 import Routers from '../routers/Router'
 
 export default function Page() {

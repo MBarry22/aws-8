@@ -24,7 +24,7 @@ const poolData = {
 }
 
 const userPool = new CognitoUserPool(poolData)
-
+export { userPool }
 
 async function getUserSession() {
   const user = getCurrentUser()
