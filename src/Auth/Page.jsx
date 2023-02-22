@@ -5,12 +5,14 @@ import * as coginto from '../cognito'
 import ConfirmEmail from './ConfirmEmail'
 import LoginForm from './LoginForm'
 import HomePage from '../HomePage'
+import ForgotPassword from './ForgotPassword'
+import ResetPassword from './ResetPassword'
 
 export default function Page() {
     const [errorMessage, setErrorMessage] = useState(null)
 
     //routing logic
-    const[page, setPage] = useState("login")
+    const[page, setPage] = useState("forgotPassword")
 
     const handleSignUp = async (username, email, password, confirmPassword) => {
     
@@ -38,13 +40,34 @@ export default function Page() {
     const handleLogin = async (username, password) => {
         try{
             await coginto.signIn(username, password)
-            setPage("success")
+            setPage("home")
             // redirect to app
         }catch(error){
             console.log("Error logging in", error)
             setErrorMessage("Error logging in")
         }
     }
+    const handleForgotPassword = async (username) => {
+        try{
+            await coginto.forgotPassword(username)
+            setPage("newPassword")
+            // redirect to app
+        }catch(error){
+            console.log("Error logging in", error)
+            setErrorMessage("Error logging in")
+        }
+    }
+    const handleNewPassword = async (username, password, code) => {
+        try{
+            await coginto.resetPassword(username,  password, code)
+            setPage("login")
+            // redirect to app
+        }catch(error){
+            console.log("Error resetting password", error)
+            setErrorMessage("Error resetting password")
+        }
+    }
+
 
 
     let currentForm = null
@@ -60,14 +83,21 @@ export default function Page() {
             case "login":
                 currentForm = <LoginForm onSubmit={handleLogin}/>
                 break
-            case "success":
-                currentForm = <HomePage/>
+            case "home":
+                currentForm = <HomePage />
+                break
+            case "forgotPassword":
+                currentForm = <ForgotPassword onSubmit={handleForgotPassword}/>
+                break
+            case "newPassword":
+                currentForm = <ResetPassword onSubmit={handleNewPassword}/>
+                break
+
         }
         
     
     return(
-        <div className="flex justifty-center items-center h-screen flex-col">
-            <h1>Auth Page</h1>
+        <div className="flex justifty-center items-center h-screen flex-col bg-slate-800 text-gray-50">
             {currentForm}
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         </div>

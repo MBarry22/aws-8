@@ -3,22 +3,27 @@ import * as cognito from './cognito'
 
 function HomePage() {
 const [user, setUser] = useState(null)
+const [page, setPage] = useState("")
+
 
 useEffect(() => {
   const user = cognito.getCurrentUser()
   setUser(user)
   }, [])
 
-  async function doSomething() {
-    const token = await cognito.getAccessToken()
+   function handleSignOut() {
+    const token = cognito.signOut()
+    setPage("login")
     console.log(token)
+    
   }
 
+
   return (
-    <div className="App">
-      
-      <h1>Aligator App</h1>
-      <button onClick={doSomething}>Do Something</button>
+    <div className="items-center text-center">
+      <h1>Welcome To The Home Page</h1>
+      {user && <h2>Welcome {user.username}</h2>}
+      <button onClick={handleSignOut}>Sign Out!</button>
       
       
     </div>
