@@ -21,86 +21,46 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleResetPassword}>
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                Username
-              </label>
-              <div className="mt-1">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  autoComplete="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="code" className="block text-sm font-medium text-gray-700">
-                Confirmation Code
-              </label>
-              <div className="mt-1">
-                <input
-                  id="code"
-                  name="code"
-                  type="text"
-                  autoComplete="off"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
-                New Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="newPassword"
-                  name="newPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="text-sm">
-                {errorMessage && (
-                  <p className="text-red-600">{errorMessage}</p>
-                )}
-                {successMessage && (
-                  <p className="text-green-600">{successMessage }</p>
-                )}
-                </div>
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Change Password
-                </button>
-                <div className="text-sm">
-                    <a href="/forgotpassword" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Forgot your password?
-                    </a>
-                </div>
-            </div>
+    <div className="min-h-screen flex flex-col items-center justify-center ">
+      <div className="w-full max-w-md p-6 rounded-lg shadow-lg bg-white">
+        <h1 className="text-2xl font-bold mb-6 text-purple-600">Reset Password</h1>
+        {errorMessage && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded" role="alert">{errorMessage}</div>}
+        {successMessage && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded" role="alert">{successMessage}</div>}
+        <form onSubmit={handleResetPassword} className="w-full">
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-gray-700 font-bold mb-2">Username</label>
+            <input
+              type="text"
+              id="username"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="code" className="block text-gray-700 font-bold mb-2">Code</label>
+            <input
+              type="text"
+              id="code"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="newPassword" className="block text-gray-700 font-bold mb-2">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reset Password</button>
         </form>
-        </div>
-        </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 export default ResetPasswordForm;

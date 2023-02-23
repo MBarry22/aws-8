@@ -27,8 +27,8 @@ function LoginForm() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold mb-6">Login</h1>
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto shadow rounded-lg px-8 pt-6 pb-8 mb-4">
+        <h1 className="text-4xl font-bold mb-6 text-purple-900">Login</h1>
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 rounded" role="alert">
             {error}
